@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1>Personas!</h1>
+
+<form class="container" action="" method = "POST">
+    {% csrf_token %}
+    <div class="container d-flex flex-row">
+        {{ form.as_p }}
+        <button class="btn btn-success" name="save">Guardar Persona</button>
+    </div>
+    
+    
+</form>
+
+
+{% if personas %}
+    <ul class="list-group">
+        {% for persona in personas %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <li class="list-group-item d-flex justify-content-around w-2">
+                {{persona.nombre}}
+                <button class="btn btn-danger" name="delete" value="{{persona.id}}""><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+
+            </li>
+
+        </form>
+           
+        {% endfor %}
+    </ul>
+    
+{% endif %}
+
+{% endblock content %}
